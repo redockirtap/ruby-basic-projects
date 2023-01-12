@@ -11,4 +11,4 @@ def substrings(string, dictionary)
   end
 end
 
-p substrings("Howdy partner, sit down! How's it going?", dictionary)
+p substrings(gets.chomp, dictionary)
