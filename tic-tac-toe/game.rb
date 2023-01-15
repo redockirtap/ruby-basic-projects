@@ -1,10 +1,11 @@
+# rubocop:disable all
 
-class ChessBoard
+class GameBoard
 
 	@@board = 
-	["__", "__", "__",
-	"__", "__", "__",
-	"__", "__", "__"]
+	[nil, nil, nil,
+	nil, nil, nil,
+	nil, nil, nil]
 
 	def initialize
 		#
@@ -41,7 +42,8 @@ class Controller
 	end
 
 	def self.win?
-		# ChessBoard.board 
+		p GameBoard.board[0..2].all?(marker) 
+
 	end
 
 	def self.draw?
@@ -55,15 +57,15 @@ class Controller
 	def self.add_marker(marker)
 		puts "choose a cell to place your marker."
 		cell = gets.chomp.to_i
-		ChessBoard.add_marker(marker, cell)
-		ChessBoard.board.map.with_index { |marker, cell| p marker, cell+1 }
+		GameBoard.add_marker(marker, cell)
+		GameBoard.board.map.with_index { |marker, cell| p marker, cell+1 }
 	end
 
 end
 
-
 Controller.start_game
-p Controller.add_marker("X")
-p Controller.add_marker("Y")
+Controller.add_marker("X")
+Controller.add_marker("X")
+Controller.add_marker("X")
 
-p ChessBoard.board
+p Controller.win?
