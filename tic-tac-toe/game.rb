@@ -30,8 +30,8 @@ class Player
 end
 
 class Controller
-	@@first_player = nil
-	@@second_player = nil
+	@@first_player = 'X'
+	@@second_player = 'O'
 	@@current_marker = 'X'
 
 	def self.start_game
@@ -51,18 +51,19 @@ class Controller
 	end
 
 	def self.win?
-		p GameBoard.board[0..2].all?(@@current_marker) # top row
-		p GameBoard.board[3..5].all?(@@current_marker) # middle row
-		p GameBoard.board[6..8].all?(@@current_marker) # bottom row
-
-		p GameBoard.board[(0..).step(3)].all?(@@current_marker) # first column
-		p GameBoard.board[(1..).step(3)].all?(@@current_marker) # second column
-		p GameBoard.board[(2..).step(3)].all?(@@current_marker) # third column
-
-		p GameBoard.board[(0..).step(4)].all?(@@current_marker) # first diagonal
-		p GameBoard.board[(2..).step(2)].all?(@@current_marker) # second diagonal
-
-		p @@current_marker
+		case 
+		when GameBoard.board[0..2].all?(@@current_marker), # top row
+			GameBoard.board[3..5].all?(@@current_marker), # middle row
+			GameBoard.board[6..8].all?(@@current_marker), # bottom row
+			GameBoard.board[(0..).step(3)].all?(@@current_marker), # first column
+			GameBoard.board[(1..).step(3)].all?(@@current_marker), # second column
+			GameBoard.board[(2..).step(3)].all?(@@current_marker), # third column
+			GameBoard.board[(0..).step(4)].all?(@@current_marker), # first diagonal
+			GameBoard.board[(2..).step(2)].all?(@@current_marker) # second diagonal
+			p true
+		else
+			p false
+		end
 	end
 
 	def self.draw?
@@ -87,4 +88,4 @@ Controller.add_marker("X")
 Controller.add_marker("X")
 
 p Controller.win?
-p GameBoard.board
+# p GameBoard.board
