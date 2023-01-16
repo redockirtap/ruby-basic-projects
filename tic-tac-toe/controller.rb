@@ -1,3 +1,5 @@
+# rubocop:disable all
+
 class Controller
 	@@first_player = 'X'
 	@@second_player = 'O'

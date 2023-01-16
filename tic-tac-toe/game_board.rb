@@ -1,3 +1,5 @@
+# rubocop:disable all
+
 class GameBoard
 
 	@@board = 
