@@ -83,13 +83,13 @@ class Controller
 	end
 
 	def self.freecell?(cell)
-		GameBoard.board[cell].class == Integer
+		GameBoard.board[cell].instance_of?(Integer)
 	end
 
 	def self.choose_cell
 		puts "Choose a cell to place #{@@current_marker} marker."
 		@@cell = gets.chomp.to_i - 1
-		Controller.choose_cell if !@@cell.between?(0, 9)
+		Controller.choose_cell unless @@cell.between?(0, 9)
 	end
 
 	def self.add_marker(marker)
@@ -102,7 +102,7 @@ class Controller
 		puts Controller.draw? ? "It's a draw. Another one? [y/n]: " : "#{@@current_marker} won! One more? [y/n]: "
 		GameBoard.reset
 		answer = gets.chomp.downcase
-		answer == 'y' ? Controller.run_game : 'See you.'
+		answer == 'y' ? Controller.run_game : puts('See you.')
 	end
 
 end
