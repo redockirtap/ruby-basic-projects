@@ -2,13 +2,14 @@
 
 class GameBoard
 
-	@@board = 
-	[1, 2, 3,
-	4, 5, 6,
-	7, 8, 9]
+	@@board = [*1..9]
 
 	def self.board
 		@@board
+	end
+
+	def self.reset
+		@@board = [*1..9]
 	end
 
 	def self.add_marker(marker, cell)
@@ -16,19 +17,16 @@ class GameBoard
 	end
 end
 
-class Player
-	attr_reader :name, :marker
+# class Player
+# 	attr_reader :name, :marker
 
-	def initialize(name, marker)
-		@name = name
-		@marker = marker
-	end
-end
+# 	def initialize(name, marker)
+# 		@name = name
+# 		@marker = marker
+# 	end
+# end
 
 class Controller
-	# @@first_player = 'X'
-	# @@second_player = 'O'
-	# @@current_marker = nil
 
 	def self.run_game
 
@@ -37,20 +35,22 @@ class Controller
 		@@current_marker = nil
 		@@cell = nil
 
-		while !Controller.draw? or !Controller.win?
-			
+		until Controller.draw? || Controller.win?
+			p Controller.draw?, Controller.win?
 			Controller.change_turn
 			Controller.choose_cell
-			while !Controller.freecell?(@@cell)
+			until Controller.freecell?(@@cell)
 				Controller.choose_cell
 			end
 			Controller.add_marker(@@current_marker)
-			p GameBoard.board, Controller.win?, @@current_marker
-			# puts Display.display
+			# p GameBoard.board, Controller.win?, @@current_marker
+			puts Display.display
 		end
 
-		p GameBoard.board
-
+		Controller.end_game
+		# p "#{current_marker} won! One more? [y/n]: "
+		# answer = gets.chomp
+		# answer.downcase == 'y' ? Controller.run_game : 'See you.'
 	end
 
 	def self.change_turn 
@@ -62,6 +62,7 @@ class Controller
 	end
 
 	def self.win?
+		# p GameBoard.board
 		case 
 		when GameBoard.board[0..2].all?(@@current_marker), # top row
 			GameBoard.board[3..5].all?(@@current_marker), # middle row
@@ -69,8 +70,8 @@ class Controller
 			GameBoard.board[(0..).step(3)].all?(@@current_marker), # first column
 			GameBoard.board[(1..).step(3)].all?(@@current_marker), # second column
 			GameBoard.board[(2..).step(3)].all?(@@current_marker), # third column
-			GameBoard.board[(0..).step(4)].all?(@@current_marker), # first diagonal
-			GameBoard.board[(2..).step(2)].all?(@@current_marker) # second diagonal
+			GameBoard.board.values_at(0, 4, 8).all?(@@current_marker), # first diagonal
+			GameBoard.board.values_at(2, 4, 6).all?(@@current_marker) # second diagonal
 			true
 		else
 			false
@@ -78,7 +79,7 @@ class Controller
 	end
 
 	def self.draw?
-		GameBoard.board.none?(/\d/)
+		GameBoard.board.none?(1..9)
 	end
 
 	def self.freecell?(cell)
@@ -95,6 +96,15 @@ class Controller
 		GameBoard.add_marker(@@current_marker, @@cell)
 	end
 
+	def self.end_game
+		p Controller.draw?
+		# puts "#{@@current_marker} won! One more? [y/n]: "
+		puts Controller.draw? ? "It's a draw. Another one? [y/n]: " : "#{@@current_marker} won! One more? [y/n]: "
+		GameBoard.reset
+		answer = gets.chomp.downcase
+		answer == 'y' ? Controller.run_game : 'See you.'
+	end
+
 end
 
 class Display
@@ -107,9 +117,3 @@ end
 
 Controller.run_game
 
-# p GameBoard.board.none?(/\d/)
-# p Controller.win?
-
-# p Controller.freecell?(1)
-# p !Controller.draw?
-# p !Controller.win?
