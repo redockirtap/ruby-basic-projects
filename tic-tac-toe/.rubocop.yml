@@ -1,5 +1,9 @@
 
 # Layout/IndentationStyle:
 #   Enabled: false
-#   Layout/IndentationWidth:
+# Layout/IndentationWidth:
+  # Enabled: false
+# Layout/ElseAlignment:
+#   Enabled: false
+# Layout/EndAlignment:
 #   Enabled: false
