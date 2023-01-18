@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop: disable Metrics/AbcSize
+
 # Displaying the Tic-Tac-Toe game in the console
 class Display
   def self.display(gameboard)
@@ -8,3 +10,4 @@ class Display
     puts " #{gameboard.board[6]} | #{gameboard.board[7]} | #{gameboard.board[8]} "
   end
 end
+# rubocop: enable Metrics/AbcSize

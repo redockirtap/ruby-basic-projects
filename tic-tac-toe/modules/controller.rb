@@ -25,7 +25,7 @@ class Controller
   private
 
   def change_turn
-    if @current_marker == @first_player
+    if @current_marker == @first_player # rubocop: disable Style/ConditionalAssignment
       @current_marker = @second_player
     else
       @current_marker = @first_player
