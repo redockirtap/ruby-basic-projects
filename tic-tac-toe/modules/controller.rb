@@ -36,18 +36,21 @@ class Controller
     row_win? || col_win? || dia_win?
   end
 
+  # Check for win in rows
   def row_win?
-    @gameboard.board[0..2].all?(@current_marker) || # top row
-      @gameboard.board[3..5].all?(@current_marker) || # middle row
-      @gameboard.board[6..8].all?(@current_marker) # bottom row
+    [0, 3, 6].any? do |range_start|
+      @gameboard.board[range_start..range_start + 2].all?(@current_marker)
+    end
   end
 
+  # Check for win in columns
   def col_win?
-    @gameboard.board[(0..).step(3)].all?(@current_marker) || # first column
-      @gameboard.board[(1..).step(3)].all?(@current_marker) || # second column
-      @gameboard.board[(2..).step(3)].all?(@current_marker) # third column
+    (0..2).any? do |range_start|
+      @gameboard.board[(range_start..).step(3)].all?(@current_marker)
+    end
   end
 
+  # Check for win in diagonals
   def dia_win?
     @gameboard.board.values_at(0, 4, 8).all?(@current_marker) || # first diagonal
       @gameboard.board.values_at(2, 4, 6).all?(@current_marker) # second diagonal
