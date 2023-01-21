@@ -15,6 +15,6 @@ First small projects are scoped on using ruby methods.
 
 Simple project of Tic Tac Toe game, where one of two players should get three-in-a-row solution.
 
-In this project game logic was divided in separate modules, which have their own ditinct logic. 
+In this project game logic was divided in separate modules, which have their own distinct logic. 
 The game is displayed via console.
 #### Live Demo: https://replit.com/@redockirtap/tictactoe?v=1
