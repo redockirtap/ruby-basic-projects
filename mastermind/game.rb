@@ -61,4 +61,22 @@ class GameController
     # if player, then call one logic
     # if computer, then call another
   end
+
+  def make_guess
+    # make a guess
+  end
+end
+
+# Module with logic for player turns for GameContrller
+module PlayerBreaker
+  def make_guess
+    # make a guess
+  end
+end
+
+# Module with logic for computer turns for GameController
+module ComputerBreaker
+  def make_guess
+    # make a guess
+  end
 end
